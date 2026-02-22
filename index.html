@@ -41,6 +41,7 @@
             font-weight: 700;
             background: linear-gradient(135deg, #4ade80, #22d3ee);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
         }
@@ -231,7 +232,8 @@
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-text">Save the file, then run
-                    <code>git add . && git commit -m "update redirect" && git push</code></div>
+                    <code>git add . && git commit -m "update redirect" && git push</code>
+                </div>
             </div>
             <div class="step">
                 <div class="step-num">4</div>
@@ -244,7 +246,7 @@
         document.getElementById('label1').textContent = QR1_LABEL;
         document.getElementById('label2').textContent = QR2_LABEL;
         var a1 = document.getElementById('url1');
-        a1.textContent = QR1_URL; a1.href = QR1_URL;
+        a1.textContent = QR1_WEB_URL; a1.href = QR1_WEB_URL;
         var a2 = document.getElementById('url2');
         a2.textContent = QR2_URL; a2.href = QR2_URL;
     </script>

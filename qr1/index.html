@@ -3,14 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QR Redirect</title>
+  <title>Opening District App…</title>
   <script src="../config.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
-      document.getElementById('dest').textContent = QR1_URL;
-      setTimeout(function () {
-        window.location.replace(QR1_URL);
-      }, 800);
+      var appLink = QR1_APP_URL;
+      var webLink = QR1_WEB_URL;
+
+      // Show the destination in the UI
+      document.getElementById('dest').textContent = 'District App';
+
+      // Fallback: if the app didn't open within 1.5 s, go to the website
+      var fallbackTimer = setTimeout(function () {
+        window.location.replace(webLink);
+      }, 1500);
+
+      // If the app opens, the page becomes hidden — cancel the fallback
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+          clearTimeout(fallbackTimer);
+        }
+      });
+
+      // Fire the deep link
+      window.location.replace(appLink);
     });
   </script>
   <style>
@@ -40,7 +56,10 @@
 </head>
 <body>
   <div class="spinner"></div>
-  <p>Redirecting to</p>
-  <p><a id="dest"></a></p>
+  <p>Opening <strong id="dest"></strong>…</p>
+  <p style="margin-top:16px;font-size:12px;">If nothing happens, <a id="weblink" href="#">tap here</a></p>
+  <script>
+    document.getElementById('weblink').href = QR1_WEB_URL;
+  </script>
 </body>
 </html>
